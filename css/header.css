@@ -8,7 +8,7 @@ header {
 }
 
 .lupa {
-  margin-left: 120px;
+  margin-left: 100px;
 }
 
 .menu img {
@@ -17,7 +17,7 @@ header {
 }
 
 .menu {
-  width: 1120px;
+  width: 1070px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -31,6 +31,15 @@ header {
   font-size: 1.1rem;
   line-height: 1.3;
   padding: 20px;
+}
+
+header #imagemHeader {
+  padding: 20px 10px;
+}
+
+.imagemHeader a {
+  padding: 0px;
+  margin: 0px;
 }
 
 .menu a:hover {
