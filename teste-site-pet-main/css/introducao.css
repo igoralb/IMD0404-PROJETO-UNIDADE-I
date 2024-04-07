@@ -33,7 +33,7 @@
 .introducao p::after {
   content: "";
   position: absolute;
-  background-image: url("/img/paw-prints-svgrepo-com\ \(1\).svg");
+  background-image: url("/teste-site-pet-main/img/paw-prints-svgrepo-com\ \(1\).svg");
   background-repeat: repeat;
   width: 750px;
   height: 690px;
