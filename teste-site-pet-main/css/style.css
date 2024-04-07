@@ -14,6 +14,10 @@ header {
   gap: 10px;
   flex-wrap: wrap;
   max-width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .logo {
@@ -87,27 +91,44 @@ img {
 .container-categorias span {
   color: #f63d3d;
 }
-.categorias {
+.top-categorias {
   display: flex;
-  /* flex: 33%; */
-  gap: 50px;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
-.categorias img {
-  width: 150px;
-  height: 150px;
-  background: whitesmoke;
-  border-radius: 8px;
-  padding: 10px;
+.categorias {
+  width: 180px;
+  text-align: center;
+  padding: 25px 15px;
+  box-shadow: 20px 20px 34px rgb(0, 0, 0, 0.03);
+  border: 1px solid #cce7d0;
+  border-radius: 4px;
+  margin: 15px 40px;
   transition: 0.25s;
 }
-.categorias img:hover {
+.categorias:hover {
   transition: 0.25s;
   transform: scale(1.05);
 }
-.categorias-texto {
-  font-size: 1.4rem;
-  font-weight: 600;
+.categorias h6 {
+  display: inline-block;
+  padding: 9px 8px 6px 8px;
+  line-height: 1;
+  border-radius: 4px;
+  color: #088178;
+  background-color: #fddde4;
+}
+.categorias img {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.25s;
+}
+
+.categorias:nth-child(even) h6 {
+  background-color: #cdebbc;
 }
 
 /*QUEM SOMOS*/
