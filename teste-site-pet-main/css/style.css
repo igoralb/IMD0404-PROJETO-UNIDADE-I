@@ -14,10 +14,6 @@ header {
   gap: 10px;
   flex-wrap: wrap;
   max-width: 100%;
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 1;
 }
 
 .logo {
@@ -91,44 +87,27 @@ img {
 .container-categorias span {
   color: #f63d3d;
 }
-.top-categorias {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
 .categorias {
-  width: 180px;
-  text-align: center;
-  padding: 25px 15px;
-  box-shadow: 20px 20px 34px rgb(0, 0, 0, 0.03);
-  border: 1px solid #cce7d0;
-  border-radius: 4px;
-  margin: 15px 40px;
+  display: flex;
+  /* flex: 33%; */
+  gap: 50px;
+  justify-content: center;
+}
+.categorias img {
+  width: 150px;
+  height: 150px;
+  background: whitesmoke;
+  border-radius: 8px;
+  padding: 10px;
   transition: 0.25s;
 }
-.categorias:hover {
+.categorias img:hover {
   transition: 0.25s;
   transform: scale(1.05);
 }
-.categorias h6 {
-  display: inline-block;
-  padding: 9px 8px 6px 8px;
-  line-height: 1;
-  border-radius: 4px;
-  color: #088178;
-  background-color: #fddde4;
-}
-.categorias img {
-  width: 100%;
-  height: 150px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  transition: 0.25s;
-}
-
-.categorias:nth-child(even) h6 {
-  background-color: #cdebbc;
+.categorias-texto {
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 /*QUEM SOMOS*/
@@ -216,7 +195,9 @@ form {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-
+form h2 span{
+  color: #f63d3d;
+}
 .form-group {
   margin-bottom: 20px;
 }
@@ -240,7 +221,7 @@ textarea {
 }
 
 button {
-  background-color: green;
+  background-color:#f63d3d;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -252,6 +233,39 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+/*form agendamento*/
+.agendamento span{
+  color: #f63d3d;
+}
+.container-agendamento {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10%;
+}
+.container-agendamento span{
+  color: #f63d3d;
+}
+.agendamento {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 60px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.form-group-agendamento {
+  margin-bottom: 20px;
+}
+
+.container1{
+  display: flex;
+  flex-wrap: wrap;
+  gap:20px;
+  flex-direction: row;
+}
+
 
 /*footer*/
 footer {
