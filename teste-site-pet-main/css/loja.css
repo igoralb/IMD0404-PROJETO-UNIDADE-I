@@ -1,0 +1,91 @@
+.banner-loja {
+  background-color: #fbbd08;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/teste-site-pet-main/img/coupon-svgrepo-com.svg");
+  background-size: 150px 150px;
+}
+.banner-loja h4 {
+  text-align: center;
+  font-size: 2rem;
+}
+.banner-loja p {
+  font-size: 1.4rem;
+}
+
+.produto-container {
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+.produto {
+  width: 23%;
+  min-width: 250px;
+  padding: 10px 15px;
+  border: 1px solid #cce7d0;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 15px 20px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+  transition: 0.2s;
+}
+
+.produto:hover {
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+}
+.produto img {
+  width: 100%;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.produtos-pets h2,
+p {
+  text-align: center;
+}
+.produtos-pets h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.produtos-pets p {
+  margin-top: 0px;
+}
+.produtos-pets span {
+  color: #f63d3d;
+}
+
+.descricao {
+  /* text-align: center; */
+  padding: 10px 0px;
+  text-align: start;
+}
+
+.descricao span {
+  color: #606063;
+  font-size: 0.9rem;
+}
+.descricao h5,
+h4 {
+  padding-top: 7px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 5px 0px;
+}
+.descricao h4 {
+  color: #da7188;
+}
+
+.produto a {
+  background-color: #088278;
+  text-decoration: none;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+}
