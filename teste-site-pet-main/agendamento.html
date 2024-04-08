@@ -56,23 +56,23 @@
             <h3> <span>Preencha</span> conforme o solicitado:</h3>
             <br>
             <div class="form-group-agendamento">
-                <label for="name">Nome do dono:</label>
-                <input type="text" id="name" name="name" placeholder="Digite seu nome">
+                <label for="name">Nome do dono: <span>*<span></label>
+                <input type="text" id="name" name="name" placeholder="Digite seu nome" required>
             </div>
 
             <div class="form-group-agendamento">
-                <label for="phone">Número de telefone:</label>
-                <input type="phone" id="phone" name="phone" placeholder="Digite o seu telefone">
+                <label for="phone">Número de telefone:<span>*<span></label>
+                <input type="phone" id="phone" name="phone" placeholder="Digite o seu telefone" required>
             </div>
 
             <div class="form-group-agendamento">
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" placeholder="Digite o seu e-mail">
+                <label for="email">E-mail:<span>*<span></label>
+                <input type="email" id="email" name="email" placeholder="Digite o seu e-mail"required>
             </div>
 
             <div class="form-group-agendamento">
-                <label for="service">Tipo de serviço:</label>
-                <select id="service" name="service">
+                <label for="service">Tipo de serviço:<span>*<span></label>
+                <select id="service" name="service" required>
                     <option value="">Selecione um serviço</option>
                     <option value="banho">Banho</option>
                     <option value="tosa">Tosa</option>
@@ -81,8 +81,8 @@
             </div>
 
             <div class="form-group-agendamento">
-                <label for="animal">Tipo de animal:</label>
-                <select id="animal" name="animal">
+                <label for="animal">Tipo de animal:<span>*<span></label>
+                <select id="animal" name="animal" required>
                     <option value="">Selecione o tipo de animal</option>
                     <option value="cachorro">Cachorro</option>
                     <option value="gato">Gato</option>
@@ -91,12 +91,12 @@
             </div>
 
             <div class="form-group-agendamento">
-                <label for="date">Data:</label>
-                <input type="date" id="date" name="date">
+                <label for="date">Data:<span>*<span></label>
+                <input type="date" id="date" name="date" required>
             </div>
 
             <div class="form-group-agendamento">
-                <label for="porte">Porte:</label>
+                <label for="porte">Porte:<span>*<span></label>
                 <div class="radio-buttons container1">
                     <input type="radio" id="pequeno" name="porte" value="pequeno">
                     <label for="pequeno">Pequeno</label>
@@ -106,6 +106,11 @@
 
                     <input type="radio" id="grande" name="porte" value="grande">
                     <label for="grande">Grande</label>
+                </div>
+                <br>
+            <div class="form-group-agendamento">
+                    <label for="extra">Comentários Extras:</label>
+                    <textarea id="comentariosextras" name="extra" rows="4" cols="50" placeholder="Algum cuidado especial que devemos ter com seu bichinho?"></textarea>
                 </div>
             </div>
             <button type="submit">Agendar</button>
