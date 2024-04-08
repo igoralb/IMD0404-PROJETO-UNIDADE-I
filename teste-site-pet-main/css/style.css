@@ -52,6 +52,7 @@ header {
   color: #f63d3d;
   text-decoration: underline;
 }
+/****************** HOME *******************/
 
 /*CORPO CENTRAL DO HOME*/
 img {
@@ -132,6 +133,58 @@ img {
   background-color: #cdebbc;
 }
 
+/*FORMULARIO INDEX*/
+
+form {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 60px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+form h2 span {
+  color: #f63d3d;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="phone"],
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #f63d3d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/******************* AGENDAMENTO ***************/
+
 /*QUEM SOMOS*/
 .container-conteudo {
   max-width: 1320px;
@@ -159,6 +212,7 @@ img {
   box-shadow: -30px 30px #f63d3d;
 }
 .conteudo {
+  gap:50px;
   display: flex;
 }
 
@@ -214,55 +268,46 @@ img {
   font-weight: 600;
 }
 
-/*FORMULARIO INDEX*/
+/*tabela agendamento*/
 
-form {
-  max-width: 800px;
-  margin: 20px auto;
-  background-color: #fff;
-  padding: 60px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+.container-tabela {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  padding: 15px;
 }
-form h2 span {
+.container-tabela h2 {
+  font-size: 2.5rem;
+  text-align: center;
+} 
+.container-tabela span {
   color: #f63d3d;
 }
-.form-group {
-  margin-bottom: 20px;
+table,tr,td,th {
+  border-collapse: collapse;
+  border: 1px solid rgb(194, 190, 190);
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+th{ 
+  height: 30px;
+  color: #f63d3d;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="phone"],
-select,
-textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+th:first-child {
+  border-left: 1px solid white; 
+  border-top: 1px solid white; 
 }
 
-button {
-  background-color: #f63d3d;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+td:nth-child(1){
+  text-align: left;
 }
 
-button:hover {
-  background-color: #0056b3;
+td{ 
+  max-width: 250px;
+  padding: 20px 10px;
+  text-align: center;
 }
+
 /*form agendamento*/
 .agendamento span {
   color: #f63d3d;
@@ -342,9 +387,7 @@ footer p {
     margin-left: 55px;
   }
   header a {
-    background-color: #ffff;
     border-radius: 4px;
-    padding: 30px 10px;
   }
 }
 
