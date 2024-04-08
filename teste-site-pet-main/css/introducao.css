@@ -42,7 +42,22 @@
   right: 5px;
   top: 135px;
 }
-a{
+a {
   text-decoration: none;
   color: black;
+}
+
+@media (max-width: 1000px) {
+  .introducao h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 1190px) {
+  .introducao img {
+    display: none;
+  }
+  .introducao p:after {
+    content: none;
+  }
 }
