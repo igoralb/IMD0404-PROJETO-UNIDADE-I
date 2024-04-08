@@ -40,6 +40,7 @@ header {
   display: flex;
   justify-content: space-between;
   gap: 30px;
+  flex-wrap: wrap;
 }
 .menu a {
   color: black;
@@ -150,15 +151,22 @@ img {
 }
 
 .container-conteudo img {
-  max-width: 40%;
+  max-width: 25%;
+  background-color: whitesmoke;
   border-radius: 8px;
   height: auto;
-  margin-left: 50px;
+  /* margin-left: 100px; */
   box-shadow: -30px 30px #f63d3d;
 }
 .conteudo {
   display: flex;
 }
+
+.conteudo-contato {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .container-conteudo p {
   font-size: 1.2rem;
   text-align: justify;
@@ -186,6 +194,7 @@ img {
   /* flex: 33%; */
   gap: 50px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .servicos img {
   width: 250px;
@@ -276,6 +285,10 @@ button:hover {
   text-align: left;
 }
 
+#agendamento-img {
+  display: none;
+}
+
 .form-group-agendamento {
   margin-bottom: 20px;
 }
@@ -317,4 +330,26 @@ footer nav a {
 footer p {
   color: rgba(55, 54, 54, 0.389);
   margin-top: 10px;
+}
+
+@media (max-width: 750px) {
+  header {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  header img {
+    margin-left: 55px;
+  }
+  header a {
+    background-color: #ffff;
+    border-radius: 4px;
+    padding: 30px 10px;
+  }
+}
+
+@media (max-width: 750px) {
+  .conteudo img {
+    display: none;
+  }
 }
