@@ -1,0 +1,48 @@
+.introducao {
+  background-color: #ffc632;
+  align-items: center;
+  margin-bottom: 120px;
+}
+
+.introducao-texto {
+  margin-left: 80px;
+}
+.introducao-texto button {
+  border-radius: 25px;
+  padding: 14px 30px;
+  background-color: #f63d3d;
+  color: #f5f5f5;
+  transition: 0.25s;
+}
+.introducao-texto button:hover {
+  transition: 0.25s;
+  transform: scale(1.05);
+}
+
+.introducao p {
+  font-size: 1.25rem;
+}
+
+.introducao img {
+  position: relative;
+  bottom: -80px;
+  left: 20px;
+  margin: 0px;
+}
+
+.introducao p::after {
+  content: "";
+  position: absolute;
+  background-image: url("/teste-site-pet-main/img/paw-prints-svgrepo-com\ \(1\).svg");
+  background-repeat: repeat;
+  width: 750px;
+  height: 690px;
+  border-radius: 50%;
+  border: 65px transparent #ffe59a;
+  right: 5px;
+  top: 135px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
