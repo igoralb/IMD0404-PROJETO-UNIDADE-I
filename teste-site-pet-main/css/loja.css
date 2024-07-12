@@ -48,7 +48,8 @@ p {
 }
 .produtos-pets h2 {
   font-size: 2.5rem;
-  margin-bottom: 10px;
+
+  margin: 20px 0px 20px 0px;
 }
 .produtos-pets p {
   margin-top: 0px;
