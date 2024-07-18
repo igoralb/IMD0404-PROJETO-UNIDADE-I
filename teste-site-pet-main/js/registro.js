@@ -31,8 +31,9 @@ function newUser(userData) {
 function register(event) {
   event.preventDefault();
 
-  console.log("heyy");
   const formData = new FormData(createUserForm);
+  const submit = document.getElementById("submit_button");
+  const confirmPassword = document.getElementById("confirmPassword");
 
   const userData = {
     name: formData.get("name"),
@@ -40,14 +41,22 @@ function register(event) {
     password: formData.get("password"),
   };
 
-  console.log("oiiiii");
+  if (userData.password === confirmPassword.value) {
+    newUser(userData)
+      .then(() => {
+        createUserForm.reset();
+      })
+      .catch((error) => {
+        console.error("houve um erro", error);
+      });
+    console.log("foi");
 
-  newUser(userData)
-    .then(() => {
-      createUserForm.reset();
-    })
-    .catch((error) => {
-      console.error("houve um erro", error);
-    });
-  console.log("foi");
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    setTimeout(() => {
+      window.location.href = "./index.html";
+    }, 1000);
+  } else {
+    alert("As senhas não são iguais");
+  }
 }
