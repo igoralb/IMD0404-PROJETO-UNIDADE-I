@@ -23,39 +23,39 @@
 
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registre-se</p>
 
-                                    <form class="mx-1 mx-md-4">
+                                    <form class="mx-1 mx-md-4" id="createUserForm">
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <input type="text" id="form3Example1c" class="form-control" placeholder="Seu Nome" />
+                                                <input type="text" name="name" id="name" class="form-control" placeholder="Seu Nome" required />
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <input type="email" id="form3Example3c" class="form-control" placeholder="Seu Email" />
+                                                <input type="email" name="email" id="email" class="form-control" placeholder="Seu Email" required />
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <input type="password" id="form3Example4c" class="form-control" placeholder="Senha" />
+                                                <input type="password" name="password" id="password" class="form-control" placeholder="Senha" minlength={5} required />
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                                <input type="password" id="form3Example4cd" class="form-control" placeholder="Repita sua senha" />
+                                                <input type="password" id="repeatedPassword" class="form-control" placeholder="Repita sua senha" required />
 
                                             </div>
                                         </div>
 
                                         <div class="form-check d-flex justify-content-center mb-0">
-                                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                            <input class="form-check-input me-2" type="checkbox" value="" required />
                                             <label class="form-check-label" for="form2Example3" style="color: #393f81;">
                                                 Eu concordo com os <a href="#!">Termos de serviço</a>
                                             </label>
@@ -66,7 +66,7 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Resgistrar-se</button>
+                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" id="submit_button">Resgistrar-se</button>
                                         </div>
                                     </form>
                                 </div>
@@ -86,6 +86,7 @@
             </div>
         </div>
     </section>
+    <script src="js/registro.js"></script>
 </body>
 
 </html>
