@@ -1,8 +1,28 @@
-const loggedInUser = JSON.parse(localStorage.getItem("user"));
+const currentUser = JSON.parse(localStorage.getItem("user"));
+
+const paymentCard = document.getElementById("paymentCard");
+const paymentPix = document.getElementById("paymentPix");
+const paymentBoleto = document.getElementById("paymentBoleto");
+const cardDetails = document.getElementById("cardDetails");
+
+function toggleCardDetails() {
+  if (paymentCard.checked) {
+    cardDetails.style.display = "block";
+  } else {
+    cardDetails.style.display = "none";
+  }
+}
+
+paymentCard.addEventListener("change", toggleCardDetails);
+paymentPix.addEventListener("change", toggleCardDetails);
+paymentBoleto.addEventListener("change", toggleCardDetails);
+
+document.addEventListener("DOMContentLoaded", toggleCardDetails);
 
 class Order {
-  constructor({ id, cidade, estado, rua, cep }) {
+  constructor({ id, userEmail, cidade, estado, rua, cep }) {
     this.id = id;
+    this.userEmail = userEmail;
     this.cidade = cidade;
     this.estado = estado;
     this.rua = rua;
@@ -38,12 +58,13 @@ function createOrder(event) {
   const submit = document.getElementById("submit_button");
 
   const orderData = {
+    userEmail: currentUser.email,
     cidade: formData.get("cidade"),
     estado: formData.get("estado"),
     rua: formData.get("rua"),
     cep: formData.get("cep"),
   };
-  if (loggedInUser) {
+  if (currentUser) {
     newOrder(orderData)
       .then(() => {
         createOrderForm.reset();
@@ -55,9 +76,50 @@ function createOrder(event) {
 
     setTimeout(() => {
       alert("Compra realizada!");
-      window.location.href = "./index.html";
+      renderUserOrders();
+      // window.location.href = "./index.html";
     }, 1000);
   } else {
     alert("Para realizar uma compra, é preciso realizar Log-in.");
   }
+}
+
+function getUserOrders(userEmail) {
+  return fetch("https://petshop-bca2a-default-rtdb.firebaseio.com/pedidos.json")
+    .then((response) => response.json())
+    .then((data) => {
+      if (!data) {
+        throw new Error("Nenhum pedido encontrado");
+      }
+      return data;
+    })
+    .catch((error) => {
+      console.error("Erro ao buscar os pedidos:", error);
+      throw error;
+    });
+}
+
+function renderUserOrders() {
+  console.log("OI");
+  const userOrdersContainer = document.getElementById("userOrdersContainer");
+  userOrdersContainer.innerHTML = ""; // Limpa a lista antes de renderizar
+
+  getUserOrders(currentUser.email)
+    .then((orders) => {
+      const ordersArray = Object.values(orders);
+      ordersArray.forEach((order) => {
+        const orderItem = document.createElement("div");
+        orderItem.classList.add("order-item");
+        orderItem.innerHTML = `
+        <p>Cidade: ${order.cidade}</p>
+        <p>Estado: ${order.estado}</p>
+        <p>Rua: ${order.rua}</p>
+        <p>CEP: ${order.cep}</p>
+      `;
+        userOrdersContainer.appendChild(orderItem);
+      });
+    })
+    .catch((error) => {
+      console.error("Erro ao renderizar os pedidos:", error);
+    });
 }
