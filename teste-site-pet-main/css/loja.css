@@ -14,15 +14,15 @@
 }
 
 .produto-container {
-  /* text-align: center; */
   display: flex;
   justify-content: center;
   padding-top: 20px;
   flex-wrap: wrap;
+  margin: 0px 20px 0px 20px;
 }
 
 .produto {
-  width: 23%;
+  width: 18%;
   min-width: 250px;
   padding: 10px 15px;
   border: 1px solid #cce7d0;
