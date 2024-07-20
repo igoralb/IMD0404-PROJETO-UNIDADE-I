@@ -20,13 +20,14 @@ paymentBoleto.addEventListener("change", toggleCardDetails);
 document.addEventListener("DOMContentLoaded", toggleCardDetails);
 
 class Order {
-  constructor({ id, userEmail, cidade, estado, rua, cep }) {
+  constructor({ id, userEmail, cidade, estado, rua, cep, saveAddress }) {
     this.id = id;
     this.userEmail = userEmail;
     this.cidade = cidade;
     this.estado = estado;
     this.rua = rua;
     this.cep = cep;
+    this.saveAddress = saveAddress;
   }
 }
 
@@ -63,6 +64,7 @@ function createOrder(event) {
     estado: formData.get("estado"),
     rua: formData.get("rua"),
     cep: formData.get("cep"),
+    saveAddress: saveAddress,
   };
   if (currentUser) {
     newOrder(orderData)
@@ -104,25 +106,64 @@ function renderUserOrders() {
 
   getUserOrders(currentUser.email)
     .then((orders) => {
-      const ordersArray = Object.values(orders);
+      const ordersArray = Object.keys(orders).map((key) => ({
+        id: key,
+        ...orders[key],
+      }));
+
       ordersArray.forEach((order) => {
         const orderItem = document.createElement("div");
         orderItem.classList.add("order-item");
         orderItem.innerHTML = `
-        <p>Cidade: ${order.cidade}</p>
-        <p>Estado: ${order.estado}</p>
-        <p>Rua: ${order.rua}</p>
-        <p>CEP: ${order.cep}</p>
-        <button>Editar</button>
-        <button>Deletar</button>
-      `;
+          <p><strong>Cidade:</strong> ${order.cidade}</p>
+          <p><strong>Estado:</strong> ${order.estado}</p>
+          <p><strong>Rua:</strong> ${order.rua}</p>
+          <p><strong>CEP:</strong> ${order.cep}</p>
+          <button class="edit-btn">Editar</button>
+          <button class="delete-btn">Deletar</button>
+        `;
+
+        // Botão de deletar
+        const botao_deleta = orderItem.querySelector(".delete-btn");
+        botao_deleta.className = "btn btn-outline-dark";
+        botao_deleta.textContent = "Deletar";
+        orderItem.appendChild(botao_deleta);
+
+        botao_deleta.addEventListener("click", function (event) {
+          event.stopPropagation();
+
+          if (confirm("Tem certeza que deseja deletar esse endereço?")) {
+            deleteAddress(order.id)
+              .then(() => {
+                return getUserOrders(currentUser.email);
+              })
+              .then(() => {
+                renderUserOrders();
+              })
+              .catch((error) => {
+                console.error(
+                  "Houve um problema ao deletar o endereço:",
+                  error
+                );
+              });
+            alert("Endereço deletado");
+          }
+        });
 
         if (order.userEmail === currentUser.email) {
           userOrdersContainer.appendChild(orderItem);
         }
+
         orderItem.addEventListener("click", () =>
-          selectAdress(order, orderItem)
+          selectAddress(order, orderItem)
         );
+
+        // Botão de edição
+        const editBtn = orderItem.querySelector(".edit-btn");
+        editBtn.addEventListener("click", function (event) {
+          event.stopPropagation(); //evita que a função selectAddress seja chamada
+          showEditModal(order);
+        });
       });
     })
     .catch((error) => {
@@ -130,16 +171,91 @@ function renderUserOrders() {
     });
 }
 
-function selectAdress(order, orderItem) {
+function showEditModal(order) {
+  document.getElementById("modalCidade").value = order.cidade;
+  document.getElementById("modalEstado").value = order.estado;
+  document.getElementById("modalRua").value = order.rua;
+  document.getElementById("modalCep").value = order.cep;
+  document.getElementById("modalOrderId").value = order.id;
+
+  // abre o modal
+  const modal = new bootstrap.Modal(document.getElementById("editOrderModal"));
+  modal.show();
+}
+
+// Salvar as alterações do modal
+document
+  .getElementById("editOrderForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const orderId = document.getElementById("modalOrderId").value;
+    const updatedOrder = {
+      cidade: document.getElementById("modalCidade").value,
+      estado: document.getElementById("modalEstado").value,
+      rua: document.getElementById("modalRua").value,
+      cep: document.getElementById("modalCep").value,
+      userEmail: currentUser.email,
+    };
+
+    updateOrder(orderId, updatedOrder)
+      .then(() => {
+        return getUserOrders(currentUser.email);
+      })
+      .then(() => {
+        renderUserOrders();
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("editOrderModal")
+        );
+        modal.hide();
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar o endereço:", error);
+      });
+  });
+
+function updateOrder(orderId, updatedOrder) {
+  return fetch(
+    `https://petshop-bca2a-default-rtdb.firebaseio.com/pedidos/${orderId}.json`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedOrder),
+    }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error("Erro ao atualizar o endereço");
+    }
+  });
+}
+
+function deleteAddress(orderId) {
+  return fetch(
+    `https://petshop-bca2a-default-rtdb.firebaseio.com/pedidos/${orderId}.json`,
+    {
+      method: "DELETE",
+    }
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error("Resposta de rede não foi ok");
+    }
+  });
+}
+
+function selectAddress(order, orderItem) {
   document
     .querySelectorAll(".order-item")
     .forEach((item) => item.classList.remove("selected"));
   orderItem.classList.add("selected");
-
-  document.getElementById("cidade").value = order.cidade;
-  document.getElementById("estado").value = order.estado;
-  document.getElementById("rua").value = order.rua;
-  document.getElementById("cep").value = order.cep;
+  getUserOrders(order);
+  if (order.id) {
+    document.getElementById("cidade").value = order.cidade;
+    document.getElementById("estado").value = order.estado;
+    document.getElementById("rua").value = order.rua;
+    document.getElementById("cep").value = order.cep;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", renderUserOrders);
