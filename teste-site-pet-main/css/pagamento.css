@@ -111,6 +111,19 @@ body {
   margin: 0 auto;
 }
 
+button {
+  background-color: #f63d3d;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
 .order-item {
   border: 1px solid #ddd;
   border-radius: 5px;

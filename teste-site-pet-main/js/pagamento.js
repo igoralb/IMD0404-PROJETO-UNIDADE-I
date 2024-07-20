@@ -113,6 +113,8 @@ function renderUserOrders() {
         <p>Estado: ${order.estado}</p>
         <p>Rua: ${order.rua}</p>
         <p>CEP: ${order.cep}</p>
+        <button>Editar</button>
+        <button>Deletar</button>
       `;
 
         if (order.userEmail === currentUser.email) {
