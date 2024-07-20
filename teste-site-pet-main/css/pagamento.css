@@ -104,3 +104,44 @@ body {
   text-decoration: none;
   color: #fdcc49;
 }
+
+.container-orders {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
+}
+
+.order-item {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* width: calc(33.333% - 2rem);  */
+  box-sizing: border-box;
+}
+
+.order-item p {
+  margin: 0.5rem 0;
+}
+
+.order-item:hover {
+  cursor: pointer;
+}
+
+.selected {
+  border-color: rgb(17, 163, 17);
+}
+
+@media (max-width: 768px) {
+  .order-item {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-item {
+    grid-template-columns: 1fr;
+  }
+}

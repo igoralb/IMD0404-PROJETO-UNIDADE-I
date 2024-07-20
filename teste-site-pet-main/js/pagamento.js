@@ -76,7 +76,6 @@ function createOrder(event) {
 
     setTimeout(() => {
       alert("Compra realizada!");
-      renderUserOrders();
       // window.location.href = "./index.html";
     }, 1000);
   } else {
@@ -100,7 +99,6 @@ function getUserOrders(userEmail) {
 }
 
 function renderUserOrders() {
-  console.log("OI");
   const userOrdersContainer = document.getElementById("userOrdersContainer");
   userOrdersContainer.innerHTML = ""; // Limpa a lista antes de renderizar
 
@@ -116,10 +114,30 @@ function renderUserOrders() {
         <p>Rua: ${order.rua}</p>
         <p>CEP: ${order.cep}</p>
       `;
-        userOrdersContainer.appendChild(orderItem);
+
+        if (order.userEmail === currentUser.email) {
+          userOrdersContainer.appendChild(orderItem);
+        }
+        orderItem.addEventListener("click", () =>
+          selectAdress(order, orderItem)
+        );
       });
     })
     .catch((error) => {
       console.error("Erro ao renderizar os pedidos:", error);
     });
 }
+
+function selectAdress(order, orderItem) {
+  document
+    .querySelectorAll(".order-item")
+    .forEach((item) => item.classList.remove("selected"));
+  orderItem.classList.add("selected");
+
+  document.getElementById("cidade").value = order.cidade;
+  document.getElementById("estado").value = order.estado;
+  document.getElementById("rua").value = order.rua;
+  document.getElementById("cep").value = order.cep;
+}
+
+document.addEventListener("DOMContentLoaded", renderUserOrders);
