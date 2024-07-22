@@ -64,7 +64,7 @@ function createOrder(event) {
     estado: formData.get("estado"),
     rua: formData.get("rua"),
     cep: formData.get("cep"),
-    saveAddress: saveAddress,
+    saveAddress: formData.get("saveAddress") ? true : false,
   };
   if (currentUser) {
     newOrder(orderData)
@@ -112,9 +112,10 @@ function renderUserOrders() {
       }));
 
       ordersArray.forEach((order) => {
-        const orderItem = document.createElement("div");
-        orderItem.classList.add("order-item");
-        orderItem.innerHTML = `
+        if (order.saveAddress) {
+          const orderItem = document.createElement("div");
+          orderItem.classList.add("order-item");
+          orderItem.innerHTML = `
           <p><strong>Cidade:</strong> ${order.cidade}</p>
           <p><strong>Estado:</strong> ${order.estado}</p>
           <p><strong>Rua:</strong> ${order.rua}</p>
@@ -123,47 +124,48 @@ function renderUserOrders() {
           <button class="delete-btn">Deletar</button>
         `;
 
-        // Botão de deletar
-        const botao_deleta = orderItem.querySelector(".delete-btn");
-        botao_deleta.className = "btn btn-outline-dark";
-        botao_deleta.textContent = "Deletar";
-        orderItem.appendChild(botao_deleta);
+          // Botão de deletar
+          const botao_deleta = orderItem.querySelector(".delete-btn");
+          botao_deleta.className = "btn btn-outline-dark";
+          botao_deleta.textContent = "Deletar";
+          orderItem.appendChild(botao_deleta);
 
-        botao_deleta.addEventListener("click", function (event) {
-          event.stopPropagation();
+          botao_deleta.addEventListener("click", function (event) {
+            event.stopPropagation();
 
-          if (confirm("Tem certeza que deseja deletar esse endereço?")) {
-            deleteAddress(order.id)
-              .then(() => {
-                return getUserOrders(currentUser.email);
-              })
-              .then(() => {
-                renderUserOrders();
-              })
-              .catch((error) => {
-                console.error(
-                  "Houve um problema ao deletar o endereço:",
-                  error
-                );
-              });
-            alert("Endereço deletado");
+            if (confirm("Tem certeza que deseja deletar esse endereço?")) {
+              deleteAddress(order.id)
+                .then(() => {
+                  return getUserOrders(currentUser.email);
+                })
+                .then(() => {
+                  renderUserOrders();
+                })
+                .catch((error) => {
+                  console.error(
+                    "Houve um problema ao deletar o endereço:",
+                    error
+                  );
+                });
+              alert("Endereço deletado");
+            }
+          });
+
+          if (order.userEmail === currentUser.email) {
+            userOrdersContainer.appendChild(orderItem);
           }
-        });
 
-        if (order.userEmail === currentUser.email) {
-          userOrdersContainer.appendChild(orderItem);
+          orderItem.addEventListener("click", () =>
+            selectAddress(order, orderItem)
+          );
+
+          // Botão de edição
+          const editBtn = orderItem.querySelector(".edit-btn");
+          editBtn.addEventListener("click", function (event) {
+            event.stopPropagation(); //evita que a função selectAddress seja chamada
+            showEditModal(order);
+          });
         }
-
-        orderItem.addEventListener("click", () =>
-          selectAddress(order, orderItem)
-        );
-
-        // Botão de edição
-        const editBtn = orderItem.querySelector(".edit-btn");
-        editBtn.addEventListener("click", function (event) {
-          event.stopPropagation(); //evita que a função selectAddress seja chamada
-          showEditModal(order);
-        });
       });
     })
     .catch((error) => {
@@ -196,6 +198,7 @@ document
       rua: document.getElementById("modalRua").value,
       cep: document.getElementById("modalCep").value,
       userEmail: currentUser.email,
+      saveAddress: document.getElementById("saveAddress").value,
     };
 
     updateOrder(orderId, updatedOrder)
