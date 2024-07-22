@@ -15,6 +15,7 @@
 
 .produto-container {
   display: flex;
+  max-width: fit-content;
   justify-content: center;
   padding-top: 20px;
   flex-wrap: wrap;

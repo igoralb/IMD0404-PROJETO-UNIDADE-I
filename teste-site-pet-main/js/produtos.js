@@ -1,16 +1,23 @@
 class Product {
-  constructor({ id, marca, preco, titulo, foto }) {
+  constructor({ id, marca, preco, titulo, foto, categoria }) {
     this.id = id;
     this.marca = marca;
     this.preco = preco;
     this.titulo = titulo;
     this.foto = foto;
+    this.categoria = categoria;
   }
 }
 
 const currentUser = JSON.parse(localStorage.getItem("user"));
 
-document.addEventListener("DOMContentLoaded", renderProducts);
+function checkAdmin() {
+  if (currentUser.email === "admin@gmail.com") {
+    document.getElementById("addProduct-btn").style.display = "flex";
+  } else {
+    document.getElementById("addProduct-btn").style.display = "none";
+  }
+}
 
 const createProductForm = document.getElementById("createProductForm");
 createProductForm.addEventListener("submit", createProduct);
@@ -43,6 +50,7 @@ function createProduct(event) {
     preco: formData.get("modalPreco"),
     titulo: formData.get("modalTitulo"),
     foto: formData.get("modalFoto"),
+    categoria: formData.get("modalCategoria"),
   };
 
   newProduct(productData)
@@ -73,6 +81,7 @@ function showEditModal(product) {
   document.getElementById("editModalFoto").value = product.foto;
   document.getElementById("editModalPreco").value = product.preco;
   document.getElementById("editProductId").value = product.id;
+  document.getElementById("editModalCategoria").value = product.categoria;
 
   const modal = new bootstrap.Modal(document.getElementById("editModal"));
   modal.show();
@@ -96,8 +105,10 @@ function getProducts() {
 }
 
 function renderProducts() {
-  const produtoContainer = document.getElementById("produtoContainer");
-  produtoContainer.innerHTML = "";
+  const cachorroContainer = document.getElementById("cachorroContainer");
+  const gatoContainer = document.getElementById("gatoContainer");
+  cachorroContainer.innerHTML = "";
+  gatoContainer.innerHTML = "";
 
   getProducts()
     .then((products) => {
@@ -108,19 +119,32 @@ function renderProducts() {
       productsArray.forEach((product) => {
         const productDiv = document.createElement("div");
         productDiv.className = "produto";
-        if (currentUser.email != "admin@gmail.com") {
+        if (currentUser.email === "admin@gmail.com") {
           productDiv.innerHTML = `
-                  <img src="${product.foto}" alt="">
-                  <div class="descricao">
-                    <span>${product.marca}</span>
-                    <h5>${product.titulo}</h5>
-                    <h4>R$ ${product.preco}</h4>
-                  </div>
-                  <button class="btn btn-primary edit-btn" data-id="${product.id}">Editar</button>
-                  <button class="btn btn-danger delete-btn" data-id="${product.id}">Deletar</button>
-                `;
-
-          produtoContainer.appendChild(productDiv);
+                    <img src="${product.foto}" alt="">
+                    <div class="descricao">
+                      <span>${product.marca}</span>
+                      <h5>${product.titulo}</h5>
+                      <h4>R$ ${product.preco}</h4>
+                    </div>
+                    <button class="btn btn-primary edit-btn" data-id="${product.id}">Editar</button>
+                    <button class="btn btn-danger delete-btn" data-id="${product.id}">Deletar</button>
+                  `;
+        } else {
+          productDiv.innerHTML = `
+                    <img src="${product.foto}" alt="">
+                    <div class="descricao">
+                      <span>${product.marca}</span>
+                      <h5>${product.titulo}</h5>
+                      <h4>R$ ${product.preco}</h4>
+                    </div>
+                     <a href="pagamento.html">Comprar</a>
+                  `;
+        }
+        if (product.categoria === "cachorro") {
+          cachorroContainer.appendChild(productDiv);
+        } else if (product.categoria === "gato") {
+          gatoContainer.appendChild(productDiv);
         }
       });
 
@@ -154,6 +178,7 @@ document
       titulo: document.getElementById("editModalTitulo").value,
       foto: document.getElementById("editModalFoto").value,
       preco: document.getElementById("editModalPreco").value,
+      categoria: document.getElementById("editModalCategoria").value,
     };
     const productId = document.getElementById("editProductId").value;
     updateProduct(productId, updatedProduct)
@@ -204,3 +229,8 @@ function deleteProduct(productId) {
       console.error("Erro ao deletar produto:", error);
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderProducts();
+  checkAdmin();
+});

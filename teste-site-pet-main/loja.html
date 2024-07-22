@@ -68,8 +68,7 @@
 
     <section class="container banner-loja">
         <div class="">
-            <!-- <h4>Tudo por 100 reais</h4>
-            <p>Save more with coupons & up to 7% off!</p> -->
+
         </div>
     </section>
 
@@ -77,9 +76,9 @@
         <section class="produtos-pets">
             <h2>Produtos para <span id="gatos">gatos</span></h2>
             <p>Descubra o paraíso dos felinos!</p>
-            <button class="btn btn-dark" style="margin: 40px;" id="addProduct-btn">Adicionar produto</button>
-            <div class="produto-container">
-                <div class="produto">
+            <button class="btn btn-dark" style="display: flex; margin: 0 auto;" id="addProduct-btn">Adicionar produto</button>
+            <div class="produto-container" id="gatoContainer">
+                <!-- <div class="produto">
                     <img src="./img/gato-whiskas.svg" alt="">
                     <div class="descricao">
                         <span>whiskas</span>
@@ -87,14 +86,14 @@
                         <h4>R$ 100</h4>
                     </div>
                     <a href="pagamento.html">Comprar</a>
-                </div>
+                </div> -->
 
             </div>
         </section>
         <section class="produtos-pets">
             <h2>Produtos para <span id="cachorros">cachorros</span></h2>
             <p>Explore nossa seção canina, onde o amor pelos cães é evidente em cada produto!</p>
-            <div class="produto-container" id="produtoContainer">
+            <div class="produto-container " id="cachorroContainer">
             </div>
         </section>
     </main>
@@ -123,6 +122,13 @@
                         <div class="mb-3">
                             <label for="modalPreco" class="form-label">Preço</label>
                             <input type="number" class="form-control" id="modalPreco" name="modalPreco" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalCategoria" class="form-label">Categoria</label>
+                            <select id="modalCategoria" name="modalCategoria" class="form-control" required>
+                                <option value="cachorro">Cachorro</option>
+                                <option value="gato">Gato</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-dark">Salvar</button>
                     </form>
@@ -155,6 +161,13 @@
                         <div class="mb-3">
                             <label for="editModalPreco" class="form-label">Preço</label>
                             <input type="number" class="form-control" id="editModalPreco" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editModalCategoria" class="form-label">Categoria</label>
+                            <select id="editModalCategoria" name="editModalCategoria" class="form-control" required>
+                                <option value="cachorro">Cachorro</option>
+                                <option value="gato">Gato</option>
+                            </select>
                         </div>
                         <input type="hidden" id="editProductId">
                         <button type="submit" class="btn btn-dark">Salvar</button>
