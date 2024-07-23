@@ -17,6 +17,9 @@ function checkAdmin() {
   } else {
     document.getElementById("addProduct-btn").style.display = "none";
   }
+  if (currentUser === null) {
+    document.getElementById("addProduct-btn").style.display = "none";
+  }
 }
 
 const createProductForm = document.getElementById("createProductForm");
