@@ -17,7 +17,23 @@ paymentCard.addEventListener("change", toggleCardDetails);
 paymentPix.addEventListener("change", toggleCardDetails);
 paymentBoleto.addEventListener("change", toggleCardDetails);
 
-document.addEventListener("DOMContentLoaded", toggleCardDetails);
+// <img src="${selectedProduct.foto}" alt="${selectedProduct.titulo}" style="max-width: 200px;">
+document.addEventListener("DOMContentLoaded", () => {
+  toggleCardDetails();
+  const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
+  console.log(selectedProduct);
+  if (selectedProduct) {
+    const produtoPrecoHTML = `
+        <span>R$ ${selectedProduct.preco}</span>
+    `;
+    document.getElementById("produtoPreco").innerHTML = produtoPrecoHTML;
+    document.getElementById("produtoPrecoTotal").innerHTML = produtoPrecoHTML;
+    document.getElementById("produtoPrecoTotalH1").innerHTML = produtoPrecoHTML;
+  } else {
+    document.getElementById("produtoPreco").innerText =
+      "Nenhum produto selecionado.";
+  }
+});
 
 class Order {
   constructor({ id, userEmail, cidade, estado, rua, cep, saveAddress }) {

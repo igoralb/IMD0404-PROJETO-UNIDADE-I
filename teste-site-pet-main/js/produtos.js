@@ -138,7 +138,7 @@ function renderProducts() {
                       <h5>${product.titulo}</h5>
                       <h4>R$ ${product.preco}</h4>
                     </div>
-                     <a href="pagamento.html">Comprar</a>
+                     <a href="pagamento.html" class="btn btn-success buy-btn" data-id="${product.id}">Comprar</a>
                   `;
         }
         if (product.categoria === "cachorro") {
@@ -146,6 +146,15 @@ function renderProducts() {
         } else if (product.categoria === "gato") {
           gatoContainer.appendChild(productDiv);
         }
+      });
+
+      //armazenamento local do produto que se deseja comprar
+      document.querySelectorAll(".buy-btn").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          const productId = event.target.dataset.id;
+          const product = productsArray.find((p) => p.id === productId);
+          localStorage.setItem("selectedProduct", JSON.stringify(product));
+        });
       });
 
       document.querySelectorAll(".edit-btn").forEach((button) => {
