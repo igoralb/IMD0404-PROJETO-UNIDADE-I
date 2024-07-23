@@ -12,13 +12,17 @@ class Product {
 const currentUser = JSON.parse(localStorage.getItem("user"));
 
 function checkAdmin() {
-  if (currentUser.email === "admin@gmail.com") {
-    document.getElementById("addProduct-btn").style.display = "flex";
-  } else {
-    document.getElementById("addProduct-btn").style.display = "none";
-  }
+  const addProductBtn = document.getElementById("addProduct-btn");
+
   if (currentUser === null) {
-    document.getElementById("addProduct-btn").style.display = "none";
+    addProductBtn.style.display = "none";
+    return;
+  }
+
+  if (currentUser.email === "admin@gmail.com") {
+    addProductBtn.style.display = "flex";
+  } else {
+    addProductBtn.style.display = "none";
   }
 }
 
@@ -122,28 +126,40 @@ function renderProducts() {
       productsArray.forEach((product) => {
         const productDiv = document.createElement("div");
         productDiv.className = "produto";
-        if (currentUser.email === "admin@gmail.com") {
+
+        if (currentUser === null) {
           productDiv.innerHTML = `
-                    <img src="${product.foto}" alt="">
-                    <div class="descricao">
-                      <span>${product.marca}</span>
-                      <h5>${product.titulo}</h5>
-                      <h4>R$ ${product.preco}</h4>
-                    </div>
-                    <button class="btn btn-primary edit-btn" data-id="${product.id}">Editar</button>
-                    <button class="btn btn-danger delete-btn" data-id="${product.id}">Deletar</button>
-                  `;
+            <img src="${product.foto}" alt="">
+            <div class="descricao">
+              <span>${product.marca}</span>
+              <h5>${product.titulo}</h5>
+              <h4>R$ ${product.preco}</h4>
+            </div>
+            <a href="#" class="btn btn-success buy-btn" data-id="${product.id}">Comprar</a>
+          `;
+        } else if (currentUser.email === "admin@gmail.com") {
+          productDiv.innerHTML = `
+            <img src="${product.foto}" alt="">
+            <div class="descricao">
+              <span>${product.marca}</span>
+              <h5>${product.titulo}</h5>
+              <h4>R$ ${product.preco}</h4>
+            </div>
+            <button class="btn btn-primary edit-btn" data-id="${product.id}">Editar</button>
+            <button class="btn btn-danger delete-btn" data-id="${product.id}">Deletar</button>
+          `;
         } else {
           productDiv.innerHTML = `
-                    <img src="${product.foto}" alt="">
-                    <div class="descricao">
-                      <span>${product.marca}</span>
-                      <h5>${product.titulo}</h5>
-                      <h4>R$ ${product.preco}</h4>
-                    </div>
-                     <a href="pagamento.html" class="btn btn-success buy-btn" data-id="${product.id}">Comprar</a>
-                  `;
+            <img src="${product.foto}" alt="">
+            <div class="descricao">
+              <span>${product.marca}</span>
+              <h5>${product.titulo}</h5>
+              <h4>R$ ${product.preco}</h4>
+            </div>
+            <a href="pagamento.html" class="btn btn-success buy-btn" data-id="${product.id}">Comprar</a>
+          `;
         }
+
         if (product.categoria === "cachorro") {
           cachorroContainer.appendChild(productDiv);
         } else if (product.categoria === "gato") {
@@ -151,9 +167,12 @@ function renderProducts() {
         }
       });
 
-      //armazenamento local do produto que se deseja comprar
       document.querySelectorAll(".buy-btn").forEach((button) => {
         button.addEventListener("click", (event) => {
+          if (currentUser === null) {
+            alert("É preciso logar primeiro para fazer uma compra.");
+            return;
+          }
           const productId = event.target.dataset.id;
           const product = productsArray.find((p) => p.id === productId);
           localStorage.setItem("selectedProduct", JSON.stringify(product));
