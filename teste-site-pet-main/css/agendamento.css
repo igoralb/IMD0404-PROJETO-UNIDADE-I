@@ -1,0 +1,79 @@
+.container-servicos {
+  text-align: center;
+  margin-bottom: 120px;
+}
+
+.container-servicos h2 {
+  font-size: 2.5rem;
+}
+.container-servicos span {
+  color: #f63d3d;
+}
+
+.servicos {
+  display: flex;
+  /* flex: 33%; */
+  gap: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.servicos img {
+  width: 250px;
+  height: 150px;
+  background: transparent;
+  border: 2px solid #f63d3d;
+  border-radius: 8px;
+  padding: 10px;
+  transition: 0.25s;
+}
+.servicos img:hover {
+  transition: 0.25s;
+  transform: scale(1.05);
+}
+.servicos-texto {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/*tabela agendamento*/
+
+.container-tabela {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+.container-tabela h2 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+.container-tabela span {
+  color: #f63d3d;
+}
+table,
+tr,
+td,
+th {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: center;
+  height: 30px;
+  color: #f63d3d;
+}
+
+th:first-child {
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+}
+
+td:nth-child(1) {
+  text-align: left;
+}
+
+td {
+  max-width: 250px;
+  padding: 20px 10px;
+  text-align: center;
+}

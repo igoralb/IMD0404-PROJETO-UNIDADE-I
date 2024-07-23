@@ -215,13 +215,11 @@ button:hover {
 }
 
 .container-conteudo img {
-  max-width: 25%;
+  max-width: fit-content;
   background-color: whitesmoke;
   border-radius: 8px;
   margin: 0 auto;
   height: auto;
-
-  box-shadow: -30px 30px #f63d3d;
 }
 .conteudo {
   gap: 20px;
@@ -230,17 +228,6 @@ button:hover {
 .conteudo-contato {
   display: flex;
   flex-wrap: wrap;
-}
-
-.container-conteudo p {
-  font-size: 1.2rem;
-  text-align: justify;
-  line-height: 1.1;
-  padding: 10px;
-  padding-left: 40px;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
 }
 
 /*NOSSOS SERVIÇOS*/
